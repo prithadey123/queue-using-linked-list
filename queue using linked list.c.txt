@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define structure for node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Declare front and rear pointers
+struct Node* front = NULL;
+struct Node* rear = NULL;
+
+// Check if queue is empty
+int isEmpty() {
+    return (front == NULL);
+}
+
+// Enqueue operation
+void enqueue(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    if (newNode == NULL) {
+        printf("Heap Overflow!\n");
+        return;
+    }
+
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (isEmpty()) {
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    printf("Inserted: %d\n", value);
+}
+
+// Dequeue operation
+void dequeue() {
+    if (isEmpty()) {
+        printf("Queue is Empty!\n");
+        return;
+    }
+
+    struct Node* temp = front;
+    printf("Deleted: %d\n", front->data);
+
+    front = front->next;
+
+    if (front == NULL) {
+        rear = NULL;
+    }
+
+    free(temp);
+}
+
+// Display queue
+void display() {
+    if (isEmpty()) {
+        printf("Queue is Empty!\n");
+        return;
+    }
+
+    struct Node* temp = front;
+    printf("Queue elements: ");
+
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+
+    printf("\n");
+}
+
+// Main function
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+
+    display();
+
+    dequeue();
+    dequeue();
+
+    display();
+
+    return 0;
+}
+
+11👆
