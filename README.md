@@ -10,7 +10,6 @@ Unlike array implementation, a linked list queue:
 - Uses `front` and `rear` pointers for efficient operations.
 
 ---
-
  Source Code
 
 ```c
